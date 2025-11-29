@@ -11,9 +11,9 @@ The FSW is designed to adhere to industry best practices, prioritizing concurren
 The FSW relies on concurrent programming principles:
 
 * **Tasks:** Seven concurrent threads manage system functions (e.g., WDT Monitor, TM Generator, Data Logger).
-* **Queues:** Two dedicated message passing queues manage safe data flow ($\text{xCommandQueue}$ and $\text{xTelemetryQueue}$).
+* **Queues:** Two dedicated message passing queues manage safe data flow (`xCommandQueue` and `xTelemetryQueue`).
 * **Mutex:** A mutex protects the global **System Mode** variable, preventing race conditions.
-* **State Machine:** Execution is governed by modes ($\text{MODE\_SAFE}$, $\text{MODE\_NOMINAL}$, $\text{MODE\_CRITICAL}$).
+* **State Machine:** Execution is governed by modes (`MODE_SAFE`, `MODE_NOMINAL`, `MODE_CRITICAL`).
 
 ---
 
@@ -21,12 +21,12 @@ The FSW relies on concurrent programming principles:
 
 **1. Software Watchdog Timer (WDT)**
 * Monitors all critical tasks.
-* Triggers the highest safety mode if a task fails to call **$\text{watchdog\_pet()}$** within $\text{15 seconds}$.
+* Triggers the highest safety mode if a task fails to call **`watchdog\_pet()`** within `15 seconds`.
 
 **2. Data Integrity (CRC-16 Validation)**
-* All incoming $\text{Telecommand}$ packets are validated with a **$\text{CRC-16 CCITT}$** checksum.
+* All incoming `Telecommand` packets are validated with a **`CRC-16 CCITT`** checksum.
 * Corrupted commands are immediately **discarded**.
-* The **$\text{\_\_attribute\_\_((packed))}$** directive guarantees memory alignment between sender and receiver.
+* The **`__attribute__((packed))`** directive guarantees memory alignment between sender and receiver.
 
 ---
 
@@ -73,10 +73,10 @@ DATA LOGGER: SUCCESS! Archived packet T: 3002 | V: 3.30 V
 ```
 ### Key FSW Execution Confirmed:
 
-* **Command Validation:** $\text{TC PROC: CRC OK}$ confirms the data integrity layer is functioning.
+* **Command Validation:** `TC PROC: CRC OK` confirms the data integrity layer is functioning.
 * **Mode Control:** The system switches modes successfully via both the command processor and the FDIR logic.
-* **Data Cycle:** $\text{TM GEN}$ and $\text{DATA LOGGER}$ run concurrently, archiving mission data.
-* **FDIR:** $\text{EPS MON}$ successfully detects the fault and forces the system into $\text{MODE\_CRITICAL}$.
+* **Data Cycle:** `TM GEN` and `DATA LOGGER` run concurrently, archiving mission data.
+* **FDIR:** `EPS MON` successfully detects the fault and forces the system into `MODE_CRITICAL`.
 
 ---
 
@@ -84,7 +84,7 @@ DATA LOGGER: SUCCESS! Archived packet T: 3002 | V: 3.30 V
 
 This project uses the **ESP-IDF framework** within **PlatformIO**.
 
-1.  **Configuration:** Update the `platformio.ini` file with your correct $\text{COM}$ port number.
+1.  **Configuration:** Update the `platformio.ini` file with your correct `COM` port number.
 2.  **Build & Upload:**
     ```bash
     platformio run --target upload -e esp32dev
