@@ -4,9 +4,6 @@
 #include <stdint.h>
 #include <stddef.h>
 
-// Standard CRC-16 CCITT polynomial (0x1021)
-#define CRC16_POLY 0x1021 
-#define CRC16_INITIAL 0xFFFF
 
 uint16_t crc16_ccitt(const uint8_t *data, size_t length) {
     uint16_t crc = CRC16_INITIAL;

@@ -5,6 +5,7 @@
 #include "freertos/queue.h"
 #include "satellite_types.h"
 #include "utils.h"
+#include <string.h>
 #include <stdio.h>
 
 extern QueueHandle_t xCommandQueue;
@@ -19,6 +20,7 @@ void vCommandInjectionTask(void *pvParameters) {
     vTaskDelay(pdMS_TO_TICKS(5000));
 
     // --- TEST 1: Send Command to Switch Mode to NOMINAL (After initial 5s delay) ---
+    memset(&tx_command, 0, sizeof(TelecommandPacket_t));
     tx_command.timestamp = xTaskGetTickCount();
     tx_command.command_id = TC_SET_MODE;
     
@@ -37,6 +39,7 @@ void vCommandInjectionTask(void *pvParameters) {
     // 2. Wait another 15 seconds to simulate ground station delay
     vTaskDelay(pdMS_TO_TICKS(15000)); 
 
+    memset(&tx_command, 0, sizeof(TelecommandPacket_t));
     // --- TEST 2: Send NO-OP Command later to test connectivity ---
     tx_command.timestamp = xTaskGetTickCount();
     tx_command.command_id = TC_NO_OP;

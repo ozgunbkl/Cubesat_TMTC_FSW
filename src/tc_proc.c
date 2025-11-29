@@ -28,13 +28,13 @@ void vCommandProcessorTask(void *pvParameters){
         }
         
         
-        if(xQueueReceive(xTelemetryQueue, &rx_packet, 0) == pdPASS) {
-            printf("Received Telemetry Packet - Timestamp: %lu, Bus Voltage: %.2f V\n",
-                   rx_packet.timestamp, (double)rx_packet.bus_voltage);
-        }
-        if (xTaskGetTickCount() > pdMS_TO_TICKS(10000) && get_system_mode() == MODE_SAFE) {
-            set_system_mode(MODE_NOMINAL); // This calls the protected function!
-        }
+        //if(xQueueReceive(xTelemetryQueue, &rx_packet, 0) == pdPASS) {
+            //printf("Received Telemetry Packet - Timestamp: %lu, Bus Voltage: %.2f V\n",
+            //    rx_packet.timestamp, (double)rx_packet.bus_voltage);
+        //}
+        //if (xTaskGetTickCount() > pdMS_TO_TICKS(10000) && get_system_mode() == MODE_SAFE) {
+        //    set_system_mode(MODE_NOMINAL); // This calls the protected function!
+        //}
         watchdog_pet(WDT_TASK_CMD_PROC);
     }
 }

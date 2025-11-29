@@ -65,7 +65,7 @@ typedef struct {
     TelecommandID_t command_id;
     uint8_t payload[8]; // Simple payload for command arguments (e.g., the new mode value)
     uint16_t crc;       // CRC-16 for integrity
-} TelecommandPacket_t;
+}__attribute__((packed)) TelecommandPacket_t;
 
 typedef enum {
     WDT_TASK_TM_GEN,
