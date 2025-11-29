@@ -21,7 +21,7 @@ The FSW relies on concurrent programming principles:
 
 **1. Software Watchdog Timer (WDT)**
 * Monitors all critical tasks.
-* Triggers the highest safety mode if a task fails to call **`watchdog\_pet()`** within `15 seconds`.
+* Triggers the highest safety mode if a task fails to call **`watchdog_pet()`** within `15 seconds`.
 
 **2. Data Integrity (CRC-16 Validation)**
 * All incoming `Telecommand` packets are validated with a **`CRC-16 CCITT`** checksum.
